@@ -50,11 +50,35 @@
                         </ul>
                     </nav>
                     <h3>About FooBar</h3>
+                     <div class="bar bar-header bar-positive" style="margin-bottom:80px;">
+                        <h1 class="title">Insert Database</h1>
+                        <a class="button button-clear" href="readjson.html">Read JSON</a>
+                    </div>
+                    <br/>
+                    <br/>
+                    <div class="list">
+                        <input type="hidden" id="id" value="" />
+                        <div class="item">
+                            <label>Title</label>
+                            <input type="text" id="title" value="" />
+                        </div>
+                        <div class="item">
+                            <label>Duration</label>
+                            <input type="text" id="duration" value="" />
+                        </div>
+                        <div class="item">
+                            <label>Price</label>
+                            <input type="text" id="price" value="" />
+                        </div>
+                        <div class="item">
+                            <input type="button" id="insert" class="button button-block" value="Insert" />
+                        </div>
+                    </div>
+    
+ 
                     <p>er sdf sfef efe wer wer wef wef wef wer ewr wer wer wer we rew rwe rew rwe re wre wr ewr we rwrwe rew rwe rw rwe rw rwr we rw rwr rewr wr wer wr we ffd gvfd bdb dfg dfgdf ger ger gd fgdf g gerer ger ger g regr er ger ger g ger gre ge g ererg erg er geg e ger ger r rg e ger rg rg re g ge egreg rg erg erg ger gr g erg reg reg r grgre gre g reg reg er greg gr eer gerg erg er ge g reg reg er ger ger ger ger g ergreg er ger g reger g erg er erg er g er ge rg reg e gr ege gre.</p>
                     <p>er sdf sfef efe wer wer wef wef wef wer ewr wer wer wer we rew rwe rew rwe re wre wr ewr we rwrwe rew rwe rw rwe rw rwr we rw rwr rewr wr wer wr we ffd gvfd bdb dfg dfgdf ger ger gd fgdf g gerer ger ger g regr er ger ger g ger gre ge g ererg erg er geg e ger ger r rg e ger rg rg re g ge egreg rg erg erg ger gr g erg reg reg r grgre gre g reg reg er greg gr eer gerg erg er ge g reg reg er ger ger ger ger g ergreg er ger g reger g erg er erg er g er ge rg reg e gr ege gre.</p>
-                     <div id="output">
-
- </div>
+                     <div id="output"> </div>
                </div>
 
                <footer data-role="footer">
@@ -102,7 +126,7 @@
  $(document).ready(function() {
  $.ajax({
  type: "GET",
- url: "http://phonegappro.esy.es/test/json.php",
+ url: "http://octesoft.com/prueba_app/json.php",
  crossDomain: true,
  cache: false,
  success: function(result){
@@ -114,7 +138,37 @@
  });
  });
  </script>
-
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $("#insert").click(function() {
+            var title = $("#title").val();
+            var duration = $("#duration").val();
+            var price = $("#price").val();
+            var dataString = "title=" + title + "&duration=" + duration + "&price=" + price + "&insert=";
+            if ($.trim(title).length > 0 & $.trim(duration).length > 0 & $.trim(price).length > 0) {
+                $.ajax({
+                    type: "POST",
+                    url: "http://octesoft.com/prueba_app/insert.php",
+                    data: dataString,
+                    crossDomain: true,
+                    cache: false,
+                    beforeSend: function() {
+                        $("#insert").val('Connecting...');
+                    },
+                    success: function(data) {
+                        if (data == "success") {
+                            alert("inserted");
+                            $("#insert").val('submit');
+                        } else if (data == "error") {
+                            alert("error");
+                        }
+                    }
+                });
+            }
+            return false;
+        });
+    });
+    </script>
 
     </body>
 </html>
