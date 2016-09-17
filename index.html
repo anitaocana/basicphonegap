@@ -52,6 +52,9 @@
                     <h3>About FooBar</h3>
                     <p>er sdf sfef efe wer wer wef wef wef wer ewr wer wer wer we rew rwe rew rwe re wre wr ewr we rwrwe rew rwe rw rwe rw rwr we rw rwr rewr wr wer wr we ffd gvfd bdb dfg dfgdf ger ger gd fgdf g gerer ger ger g regr er ger ger g ger gre ge g ererg erg er geg e ger ger r rg e ger rg rg re g ge egreg rg erg erg ger gr g erg reg reg r grgre gre g reg reg er greg gr eer gerg erg er ge g reg reg er ger ger ger ger g ergreg er ger g reger g erg er erg er g er ge rg reg e gr ege gre.</p>
                     <p>er sdf sfef efe wer wer wef wef wef wer ewr wer wer wer we rew rwe rew rwe re wre wr ewr we rwrwe rew rwe rw rwe rw rwr we rw rwr rewr wr wer wr we ffd gvfd bdb dfg dfgdf ger ger gd fgdf g gerer ger ger g regr er ger ger g ger gre ge g ererg erg er geg e ger ger r rg e ger rg rg re g ge egreg rg erg erg ger gr g erg reg reg r grgre gre g reg reg er greg gr eer gerg erg er ge g reg reg er ger ger ger ger g ergreg er ger g reger g erg er erg er g er ge rg reg e gr ege gre.</p>
+                     <div id="output">
+
+ </div>
                </div>
 
                <footer data-role="footer">
@@ -94,5 +97,24 @@
         <script type="text/javascript" src="js/jquery.js"></script>
         <script type="text/javascript" src="js/jquery.mobile.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
+ <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+ <script type="text/javascript">
+ $(document).ready(function() {
+ $.ajax({
+ type: "GET",
+ url: "http://phonegappro.esy.es/test/json.php",
+ crossDomain: true,
+ cache: false,
+ success: function(result){
+ var result=$.parseJSON(result);
+ $.each(result, function(i, field){
+ $("#output").append("Title: "+ field.title + " duration: "+field.duration +" Price:"+field.price+"<br/>");
+ });
+ }
+ });
+ });
+ </script>
+
+
     </body>
 </html>
